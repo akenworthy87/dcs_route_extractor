@@ -1,0 +1,15 @@
+{
+    "workbench.colorCustomizations": {
+        "editorBracketHighlight.foreground1": "#5bb3b3",
+        "editorBracketHighlight.foreground2": "#fac863",
+        "editorBracketHighlight.foreground3": "#f99157",
+        "editorBracketHighlight.foreground4": "#ec5f67",
+        "editorBracketHighlight.foreground5": "#bb80b3",
+        "editorBracketHighlight.foreground6": "#98C379",
+        "activityBar.background": "#3a4355",
+        "titleBar.activeBackground": "#3a4355",
+        "titleBar.activeForeground": "#FFFCFB"
+    },
+    "python-envs.defaultEnvManager": "ms-python.python:venv",
+    "python-envs.pythonProjects": []
+}
