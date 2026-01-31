@@ -63,6 +63,8 @@ def convert_offset_to_coords(origin_mgrs, north_offset, east_offset):
     # aeqd_proj = CRS.from_proj4(f"+proj=tmerc +lat_0={lat_origin} +lon_0={lon_origin} +datum=WGS84 +units=m +no_defs +k_0=0.9996")
     # aeqd_proj = CRS.from_proj4(f"+proj=aeqd +lat_0={lat_origin} +lon_0={lon_origin} +datum=WGS84 +units=m +no_defs")
     
+    
+    # Conversion method from https://github.com/pydcs/dcs/blob/master/dcs/terrain/projections/transversemercator.py
     aeqd_proj = CRS.from_proj4(
             " ".join(
                 [
