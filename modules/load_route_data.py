@@ -1,7 +1,11 @@
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from pathlib import Path
+
 import luadata
 
 
-def load_route_data(filepath: str) -> dict:
+def load_route_data(filepath: Path) -> dict:
     """
     Loads and converts a DCS route planning tool file from luadata to py-dict
 
