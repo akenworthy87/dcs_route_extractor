@@ -2,6 +2,10 @@ from mgrs import MGRS
 from pyproj import Transformer, CRS
 
 
+# TODO: #4 Would be good to refactor this by splitting into seperate functions
+#   * MGRS conversion and creating the projection transformers only need to run once
+#   * This is doing the above every waypoint instead just once per run
+#   ? Maybe convert to a class method?
 def convert_offset_to_coords(origin_mgrs, north_offset, east_offset):
     """
     Convert MGRS coordinates with applied north and east offsets to new coordinates.
@@ -29,7 +33,7 @@ def convert_offset_to_coords(origin_mgrs, north_offset, east_offset):
         offset application. The projection is configured with specific parameters
         matching DCS terrain projection conventions.
     """
-    
+
     # origin_mgrs = "34W EA 62702 43625"
     # north_offset = 202541  # meters to add (north)
     # east_offset = 332102   # meters to add (east)
@@ -57,29 +61,30 @@ def convert_offset_to_coords(origin_mgrs, north_offset, east_offset):
     # aeqd_proj = CRS.from_proj4(f"+proj=tmerc +lat_0={lat_origin} +lon_0={lon_origin} +datum=WGS84 +units=m +no_defs +k_0=1")
     # aeqd_proj = CRS.from_proj4(f"+proj=tmerc +lat_0={lat_origin} +lon_0={lon_origin} +datum=WGS84 +units=m +no_defs +k_0=0.9996")
     # aeqd_proj = CRS.from_proj4(f"+proj=aeqd +lat_0={lat_origin} +lon_0={lon_origin} +datum=WGS84 +units=m +no_defs")
-    
-    
+
     # Conversion method from https://github.com/pydcs/dcs/blob/master/dcs/terrain/projections/transversemercator.py
     aeqd_proj = CRS.from_proj4(
-            " ".join(
-                [
-                    "+proj=tmerc",
-                    "+lat_0=0",
-                    f"+lon_0=21",
-                    f"+k_0=0.9996",
-                    f"+x_0={lon_origin}",
-                    f"+y_0={lat_origin}",
-                    "+towgs84=0,0,0,0,0,0,0",
-                    "+units=m",
-                    "+vunits=m",
-                    "+ellps=WGS84",
-                    "+no_defs",
-                    "+axis=neu",
-                ]
-            ))
+        " ".join(
+            [
+                "+proj=tmerc",
+                "+lat_0=0",
+                f"+lon_0=21",
+                f"+k_0=0.9996",
+                f"+x_0={lon_origin}",
+                f"+y_0={lat_origin}",
+                "+towgs84=0,0,0,0,0,0,0",
+                "+units=m",
+                "+vunits=m",
+                "+ellps=WGS84",
+                "+no_defs",
+                "+axis=neu",
+            ]
+        ))
 
-    to_aeqd = Transformer.from_crs(CRS("WGS84"), aeqd_proj, always_xy=True)   # input is lon,lat
-    from_aeqd = Transformer.from_crs(aeqd_proj, CRS("WGS84"), always_xy=True) # output is lon,lat
+    to_aeqd = Transformer.from_crs(
+        CRS("WGS84"), aeqd_proj, always_xy=True)   # input is lon,lat
+    from_aeqd = Transformer.from_crs(aeqd_proj, CRS(
+        "WGS84"), always_xy=True)  # output is lon,lat
 
     # origin in AEQD coordinates (should be near 0,0)
     x0, y0 = to_aeqd.transform(lon_origin, lat_origin)
