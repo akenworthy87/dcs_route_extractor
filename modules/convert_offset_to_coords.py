@@ -3,6 +3,33 @@ from pyproj import Transformer, CRS
 
 
 def convert_offset_to_coords(origin_mgrs, north_offset, east_offset):
+    """
+    Convert MGRS coordinates with applied north and east offsets to new coordinates.
+    This function takes an origin point in MGRS format and applies north/east offsets
+    (in meters) to calculate a new geographic location. It uses a Transverse Mercator
+    projection centered at the origin to accurately apply the offsets.
+    Args:
+        origin_mgrs (str): Origin point in MGRS format (e.g., "34W EA 62702 43625").
+                           Spaces in the string are normalized.
+        north_offset (float): Distance in meters to offset northward (positive values
+                             move north, negative values move south).
+        east_offset (float): Distance in meters to offset eastward (positive values
+                            move east, negative values move west).
+    Returns:
+        tuple: A tuple containing four elements:
+            - lat_new (float): Latitude of the new location in decimal degrees.
+            - lon_new (float): Longitude of the new location in decimal degrees.
+            - mgrs_result (str): New location in compact MGRS format (no spaces).
+            - pretty_mgrs (str): New location in formatted MGRS format with spaces
+                                (e.g., "34W EA 62702 43625").
+    Raises:
+        RuntimeError: If the MGRS to lat/lon conversion returns an unexpected format.
+    Note:
+        Uses a Transverse Mercator projection (tmerc) with WGS84 datum for accurate
+        offset application. The projection is configured with specific parameters
+        matching DCS terrain projection conventions.
+    """
+    
     # origin_mgrs = "34W EA 62702 43625"
     # north_offset = 202541  # meters to add (north)
     # east_offset = 332102   # meters to add (east)

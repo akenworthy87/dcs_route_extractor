@@ -1,11 +1,21 @@
 from modules.build_waypoint_coords import build_waypoint_coords
 
 
-def process_waypoints(route_data, route_name):
-    waypoints = []
-    for i, radar in enumerate(route_data[route_name]):
+def process_waypoints(route_data: dict, route_name: str):
+    """
+    Takes a route data dict and processes the waypoints in the selected route name.
 
-        info = build_waypoint_coords(radar)
+    Arguments:
+        route_data {dict} -- route data dict
+        route_name {str} -- route name
+
+    Returns:
+        list -- list of processed waypoint data
+    """    
+    waypoints = []
+    for i, waypoint in enumerate(route_data[route_name]):
+
+        info = build_waypoint_coords(waypoint)
 
         waypoints.append((
             i+1,

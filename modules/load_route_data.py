@@ -1,5 +1,15 @@
 import luadata
 
-def load_route_data(filepath = r'') -> dict:
+
+def load_route_data(filepath: str) -> dict:
+    """
+    Loads and converts a DCS route planning tool file from luadata to py-dict
+
+    Arguments:
+        filepath {str} -- filepath to DCS route file
+
+    Returns:
+        dict -- Converted dict of route file data
+    """
     route_data = luadata.read(filepath, encoding='utf-8')
     return route_data
