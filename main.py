@@ -2,14 +2,26 @@ import sys
 from modules.load_route_data import load_route_data
 from modules.process_waypoints import process_waypoints
 from modules.export_to_csv import export_to_csv
+from modules.process_argv import process_argv
+from modules.open_file_dialog import open_file_dialog
+from modules.select_routename import select_routename
 
 
 def main(argv: list[str] | None = None):
     if argv is None:
         argv = sys.argv
 
-    filepath = r'Kola.lua'
-    routename = 'Radars2'
+
+    # filepath = r'Kola.lua'
+    # routename = 'Radars2'
+    filepath, routename = process_argv(argv)
+    
+    # If no filepath provided, open file dialog
+    if filepath is None:
+        filepath = open_file_dialog()
+    if filepath is None:
+        # Assume the user has cancelled out, so exit gracefully
+        sys.exit(0)
     
     # Load DCS route data 
     try:
@@ -18,6 +30,10 @@ def main(argv: list[str] | None = None):
         print(e)
         sys.exit(1)
     
+    # If no route name provided, select one
+    if routename is None:
+        routename = select_routename(route_data)
+        
     # Process waypoints in route
     waypoints = process_waypoints(route_data, routename)
     

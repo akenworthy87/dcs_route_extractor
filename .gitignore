@@ -1,7 +1,2 @@
-modules/__pycache__/__init__.cpython-314.pyc
-modules/__pycache__/build_waypoint_coords.cpython-314.pyc
-modules/__pycache__/convert_offset_to_coords.cpython-314.pyc
-modules/__pycache__/export_to_csv.cpython-314.pyc
-modules/__pycache__/format_latlongs.cpython-314.pyc
-modules/__pycache__/load_route_data.cpython-314.pyc
-modules/__pycache__/process_waypoints.cpython-314.pyc
+modules/__pycache__/*
+.vscode/launch.json
