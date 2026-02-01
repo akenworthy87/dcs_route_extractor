@@ -12,7 +12,11 @@ def main(argv: list[str] | None = None):
     routename = 'Radars2'
     
     # Load DCS route data 
-    route_data = load_route_data(filepath)
+    try:
+        route_data = load_route_data(filepath)
+    except FileNotFoundError as e:
+        print(e)
+        sys.exit(1)
     
     # Process waypoints in route
     waypoints = process_waypoints(route_data, routename)
