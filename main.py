@@ -32,7 +32,11 @@ def main(argv: list[str] | None = None):
     
     # If no route name provided, select one
     if routename is None:
-        routename = select_routename(route_data)
+        try:
+            routename = select_routename(route_data)
+        except ValueError as e:
+            print(e)
+            sys.exit(1)
         
     # Process waypoints in route
     waypoints = process_waypoints(route_data, routename)
