@@ -4,6 +4,9 @@
 
 def select_routename(routedata: dict) -> str:
     enumerate_keys = list(enumerate(routedata.keys(), start=1))
+    if len(enumerate_keys) == 0:
+        print("No route names found in route data. Please check your route file and try again.")
+        raise ValueError("No route names found in route data.")
     
     print("Select a route name:")
     for i, key in enumerate_keys:
