@@ -1,2 +1,4 @@
 modules/__pycache__/*
 .vscode/launch.json
+build/*
+dist/dcs_route_extractor/*
