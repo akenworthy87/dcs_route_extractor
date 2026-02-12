@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 import yaml
 
@@ -64,10 +63,3 @@ def select_terrain_spec(filelist: list[str] | None = None) -> str:
 def split_filename_from_path(filepath: Path) -> str:
     filename = filepath.stem
     return filename.capitalize()
-
-
-# os.chdir('..')
-print(os.getcwd())
-filepath = r'proof_of_concept\llKola.lua'
-# print(list_available_terrain_specs())
-print(load_terrain_specs(Path(filepath)))
