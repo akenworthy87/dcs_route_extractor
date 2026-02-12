@@ -1,12 +1,11 @@
 from modules.convert_offset_to_coords import convert_offset_to_coords
 from modules.format_latlongs import latlon_to_decimal_minutes, latlon_to_dms
 
-
-# TODO: move terrain specs to spec files
-ORIGIN_MGRS = "34W EA 62702 43625"
+from modules.process_terrain_spec import TerrainSpec
 
 
-def build_waypoint_coords(waypoint):
+
+def build_waypoint_coords(waypoint, terrain_spec: TerrainSpec) -> dict:
     """
     Takes a waypoint and builds a waypoint coord object containing the exported coordinate data
 
@@ -21,7 +20,7 @@ def build_waypoint_coords(waypoint):
     name = waypoint['name'].upper()
     north_offset = waypoint['x']
     east_offset = waypoint['y']
-    lat_new, lon_new, mgrs_result, pretty_mgrs = convert_offset_to_coords(ORIGIN_MGRS, north_offset, east_offset)
+    lat_new, lon_new, mgrs_result, pretty_mgrs = convert_offset_to_coords(terrain_spec, north_offset, east_offset)
 
     lat_dms, lon_dms = latlon_to_dms(lat_new, lon_new)
     lat_dm, lon_dm = latlon_to_decimal_minutes(lat_new, lon_new)

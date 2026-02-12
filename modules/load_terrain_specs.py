@@ -4,23 +4,32 @@ import yaml
 
 def load_terrain_specs(filepath: Path):
     terrain_name = split_filename_from_path(Path(filepath))
-    terrain_specs = load_terrain_specs_from_file(terrain_name)
-    return terrain_specs
+    terrain_specs_init = load_terrain_specs_from_file(terrain_name)
+    validate_terrain_specs(terrain_specs_init)
+    return terrain_specs_init
 
+
+def validate_terrain_specs(terrain_specs_init: dict|None):
+    required_keys = ['origin_mgrs', 'central_meridian', 'scale_factor']
+    assert isinstance(terrain_specs_init, dict), "Terrain specs should be a dictionary."
+    for key in required_keys:
+        if key not in terrain_specs_init:
+            raise ValueError(
+                f"Missing required key '{key}' in terrain specs. Please check the yaml file and try again.")
 
 def list_available_terrain_specs():
     filelist = sorted([f.stem for f in Path('terrain_specs').glob('*.yaml')])
     return filelist
 
 
-def load_terrain_specs_from_file(terrain_name: str) -> dict | None:
+def load_terrain_specs_from_file(terrain_name: str) -> dict:
     """
     Loads terrain specs from yaml file
 
     Arguments:
         terrain_name {str} -- Name of terrain to load specs for
     """
-    terrain_specs = None
+    # terrain_specs_init = None
     filelist = list_available_terrain_specs()
     if terrain_name not in filelist:
         print(
@@ -30,8 +39,8 @@ def load_terrain_specs_from_file(terrain_name: str) -> dict | None:
         spec_name = terrain_name
 
     with open(f'terrain_specs/{spec_name}.yaml', 'r') as f:
-        terrain_specs = yaml.safe_load(f)
-    return terrain_specs
+        terrain_specs_init = yaml.safe_load(f)
+    return terrain_specs_init
 
 
 def select_terrain_spec(filelist: list[str] | None = None) -> str:

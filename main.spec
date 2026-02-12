@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[('.venv\\Lib\\site-packages\\libmgrs.cp314-win_amd64.pyd', '.')],
-    datas=[('terrain_specs/', 'terrain_specs/')],
+    datas=[],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
