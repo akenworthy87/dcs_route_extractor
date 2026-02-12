@@ -14,6 +14,7 @@ class TerrainSpec:
     origin_mgrs_compact: Optional[str] = None
     lat_origin: Optional[float] = None
     lon_origin: Optional[float] = None
+    
     terrain_proj: Optional[CRS] = None
     to_terrain_proj: Optional[Transformer] = None
     from_terrain_proj: Optional[Transformer] = None
