@@ -5,6 +5,8 @@ from modules.export_to_csv import export_to_csv
 from modules.process_argv import process_argv
 from modules.open_file_dialog import open_file_dialog
 from modules.select_routename import select_routename
+from modules.load_terrain_specs import load_terrain_specs
+from modules.process_terrain_spec import process_terrain_spec, TerrainSpec
 
 
 def main(argv: list[str] | None = None):
@@ -37,9 +39,19 @@ def main(argv: list[str] | None = None):
         except ValueError as e:
             print(e)
             sys.exit(1)
+            
+    
+    try:
+        # Load terrain specs
+        terrain_specs_init = load_terrain_specs(filepath)
+        # Create TerrainSpec object
+        terrain_spec = process_terrain_spec(terrain_specs_init)
+    except (FileNotFoundError, ValueError) as e:
+        print(e)
+        sys.exit(1)
         
     # Process waypoints in route
-    waypoints = process_waypoints(route_data, routename)
+    waypoints = process_waypoints(route_data, routename, terrain_spec)
     
     # Export waypoints to CSV
     export_to_csv(waypoints)
