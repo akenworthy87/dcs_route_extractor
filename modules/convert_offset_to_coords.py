@@ -49,6 +49,8 @@ def convert_offset_to_coords(terrain_spec: TerrainSpec, north_offset: float, eas
     y_new = y0 + (north_offset)
 
     # transform back to geographic coordinates
+    lon_new: float
+    lat_new: float
     lon_new, lat_new = from_terrain_proj.transform(x_new, y_new)
 
     # convert result back to MGRS. Use precision 5 to match 1-meter digits (same as input).

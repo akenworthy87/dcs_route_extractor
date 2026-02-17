@@ -7,6 +7,8 @@ def export_to_csv(waypoints: list):
         writer.writerow([
             'Index',
             'name',
+            'altitude',
+            'altitude_type',
             'north_offset',
             'east_offset',
             'latitude',

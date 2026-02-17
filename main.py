@@ -27,7 +27,7 @@ def main(argv: list[str] | None = None):
     
     # Load DCS route data 
     try:
-        route_data = load_routes_data(filepath)
+        routes_data = load_routes_data(filepath)
     except FileNotFoundError as e:
         print(e)
         sys.exit(1)
@@ -35,7 +35,7 @@ def main(argv: list[str] | None = None):
     # If no route name provided, select one
     if routename is None:
         try:
-            routename = select_routename(route_data)
+            routename = select_routename(routes_data)
         except ValueError as e:
             print(e)
             sys.exit(1)
@@ -51,7 +51,7 @@ def main(argv: list[str] | None = None):
         sys.exit(1)
         
     # Process waypoints in route
-    waypoints = process_waypoints(route_data, routename, terrain_spec)
+    waypoints = process_waypoints(routes_data, routename, terrain_spec)
     
     # Export waypoints to CSV
     export_to_csv(waypoints)

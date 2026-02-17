@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pathlib import Path
 
-from dataclasses import dataclass
+from typing import TypedDict
 import luadata
 
 
@@ -20,8 +20,8 @@ def load_routes_data(filepath: Path) -> RoutesData:
     return routes_data
 
 
-@dataclass
-class Waypoint:
+
+class Waypoint(TypedDict):
     """One point in a DCS‑route file."""
     speed_locked: bool
     type: str
@@ -35,8 +35,9 @@ class Waypoint:
     alt: float
 
 
-@dataclass
-class RoutesData:
+
+class RoutesData(TypedDict):
     """A named route consisting of an ordered list of waypoints."""
+    # routes_data = dict[str, list[Waypoint]]
     route_name: str
     waypoints: list[Waypoint]
