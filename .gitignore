@@ -3,3 +3,4 @@ __pycache__
 build/*
 dist/dcs_route_extractor/*
 .coverage
+waypoint_coords.csv
