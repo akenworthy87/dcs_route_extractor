@@ -1,5 +1,5 @@
 import sys
-from modules.load_route_data import load_route_data
+from modules.load_route_data import load_routes_data
 from modules.process_waypoints import process_waypoints
 from modules.export_to_csv import export_to_csv
 from modules.process_argv import process_argv
@@ -27,7 +27,7 @@ def main(argv: list[str] | None = None):
     
     # Load DCS route data 
     try:
-        route_data = load_route_data(filepath)
+        route_data = load_routes_data(filepath)
     except FileNotFoundError as e:
         print(e)
         sys.exit(1)
