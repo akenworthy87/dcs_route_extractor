@@ -3,21 +3,20 @@ from mgrs import MGRS
 from pyproj import Transformer, CRS
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class TerrainSpec:
     origin_mgrs: str
     central_meridian: int
     scale_factor: float
-    
+
     # Calculated fields
     origin_mgrs_compact: str = field(init=False)
     lat_origin: float = field(init=False)
     lon_origin: float = field(init=False)
-    
+
     terrain_proj: CRS = field(init=False)
     to_terrain_proj: Transformer = field(init=False)
     from_terrain_proj: Transformer = field(init=False)
-
 
     def make_transformers(self):
         # Conversion method from https://github.com/pydcs/dcs/blob/master/dcs/terrain/projections/transversemercator.py
@@ -40,11 +39,27 @@ class TerrainSpec:
                         "+axis=neu",
                     ]
                 )
-            ))
+            )
+        )
 
-        super().__setattr__('to_terrain_proj', Transformer.from_crs(CRS("WGS84"), self.terrain_proj, always_xy=True))  # input is lon,lat
-        super().__setattr__('from_terrain_proj', Transformer.from_crs(self.terrain_proj, CRS("WGS84"), always_xy=True))  # output is lon,lat
-
+        super().__setattr__(
+            'to_terrain_proj',
+            Transformer.from_crs(
+                # input is lon,lat
+                CRS("WGS84"),
+                self.terrain_proj,
+                always_xy=True
+            )
+        )
+        super().__setattr__(
+            'from_terrain_proj',
+            Transformer.from_crs(
+                # output is lon,lat
+                self.terrain_proj,
+                CRS("WGS84"),
+                always_xy=True
+            )
+        )
 
     def mgrs_to_latlon(self):
         """convert MGRS -> lat, lon"""
@@ -64,7 +79,7 @@ class TerrainSpec:
     def __post_init__(self):
         # Validate MGRS format
         super().__setattr__('origin_mgrs_compact', self.origin_mgrs.replace(" ", ""))
-        
+
         # self.origin_mgrs_compact = self.origin_mgrs.replace(" ", "")
         self.mgrs_to_latlon()
         self.make_transformers()
