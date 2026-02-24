@@ -19,7 +19,7 @@ def build_waypoint_coords(waypoint: Waypoint, terrain_spec: TerrainSpec) -> Wayp
 
     name = waypoint['name'].upper()
     
-    alt = waypoint['alt']
+    alt = float(waypoint['alt'])
     alt_type = waypoint['alt_type']
     
     north_offset = waypoint['x']
