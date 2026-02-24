@@ -39,8 +39,8 @@ def build_waypoint_coords(waypoint: Waypoint, terrain_spec: TerrainSpec) -> Wayp
         'east_offset': east_offset,
         'latitude': lat_new,
         'longitude': lon_new,
-        'lat_prcise': lat_dms,
-        'lon_prcise': lon_dms,
+        'lat_precise': lat_dms,
+        'lon_precise': lon_dms,
         'lat_dm': lat_dm,
         'lon_dm': lon_dm,
         'mgrs_compact': mgrs_result,
@@ -57,8 +57,8 @@ class WaypointCoords(TypedDict):
     east_offset: float
     latitude: float
     longitude: float
-    lat_prcise: str
-    lon_prcise: str
+    lat_precise: str
+    lon_precise: str
     lat_dm: str
     lon_dm: str
     mgrs_compact: str

@@ -43,8 +43,8 @@ class Test_Build_Waypoint_Coords:
         assert isinstance(result['east_offset'], float)
         assert isinstance(result['latitude'], float)
         assert isinstance(result['longitude'], float)
-        assert isinstance(result['lat_prcise'], str)
-        assert isinstance(result['lon_prcise'], str)
+        assert isinstance(result['lat_precise'], str)
+        assert isinstance(result['lon_precise'], str)
         assert isinstance(result['lat_dm'], str)
         assert isinstance(result['lon_dm'], str)
         assert isinstance(result['mgrs_compact'], str)
@@ -66,8 +66,8 @@ class Test_Build_Waypoint_Coords:
         assert self.result['longitude'] == 31.15499773059966
 
     def test_result_latlon_precise(self):
-        assert self.result['lat_prcise'] == "69°31'42.20"
-        assert self.result['lon_prcise'] == "31°9'17.99"
+        assert self.result['lat_precise'] == "69°31'42.20"
+        assert self.result['lon_precise'] == "31°9'17.99"
 
     def test_result_latlon_dm(self):
         assert self.result['lat_dm'] == "69°31.703"
