@@ -19,7 +19,11 @@ from modules.build_waypoint_coords import build_waypoint_coords
 def step_given_map_name(context, map_name:str):
     context.map_name = map_name.title()
     # Load terrain specs
-    context.terrain_specs_init = load_terrain_specs(Path(context.map_name))
+    try:
+        context.terrain_specs_init = load_terrain_specs(Path(context.map_name), bypass_file_check=True)
+    except (FileNotFoundError, ValueError) as e:
+        print(e)
+        assert False, f"Failed to load terrain specs for map: {context.map_name}. Error: {e}"
     # Create TerrainSpec object
     context.terrain_spec = process_terrain_spec(context.terrain_specs_init)
 

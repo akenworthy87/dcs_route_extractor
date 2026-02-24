@@ -2,9 +2,15 @@ from pathlib import Path
 import yaml
 
 
-def load_terrain_specs(filepath: Path):
+def load_terrain_specs(filepath: Path, bypass_file_check: bool = False) -> dict:
     terrain_name = split_filename_from_path(Path(filepath))
-    terrain_specs_init = load_terrain_specs_from_file(terrain_name)
+
+    if bypass_file_check:
+        spec_name = terrain_name
+    else:
+        spec_name = check_terrain_specs_file_exists(terrain_name)
+
+    terrain_specs_init = load_terrain_specs_from_file(spec_name)
     validate_terrain_specs(terrain_specs_init)
     return terrain_specs_init
 
@@ -21,15 +27,7 @@ def list_available_terrain_specs():
     filelist = sorted([f.stem for f in Path('terrain_specs').glob('*.yaml')])
     return filelist
 
-
-def load_terrain_specs_from_file(terrain_name: str) -> dict:
-    """
-    Loads terrain specs from yaml file
-
-    Arguments:
-        terrain_name {str} -- Name of terrain to load specs for
-    """
-    # terrain_specs_init = None
+def check_terrain_specs_file_exists(terrain_name: str) -> str:
     filelist = list_available_terrain_specs()
     if terrain_name not in filelist:
         print(
@@ -37,7 +35,15 @@ def load_terrain_specs_from_file(terrain_name: str) -> dict:
         spec_name = select_terrain_spec(filelist)
     else:
         spec_name = terrain_name
+    return spec_name
 
+def load_terrain_specs_from_file(spec_name: str) -> dict:
+    """
+    Loads terrain specs from yaml file
+
+    Arguments:
+        spec_name {str} -- Name of terrain to load specs for
+    """
     with open(f'terrain_specs/{spec_name}.yaml', 'r') as f:
         terrain_specs_init = yaml.safe_load(f)
     return terrain_specs_init
