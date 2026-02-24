@@ -66,13 +66,13 @@ class Test_Build_Waypoint_Coords:
         assert self.result['longitude'] == 31.15499773059966
 
     def test_result_latlon_precise(self):
-        assert self.result['lat_precise'] == "69°31'42.20"
-        assert self.result['lon_precise'] == "31°9'17.99"
+        assert self.result['lat_precise'] == '''N 69°31'42.20"'''
+        assert self.result['lon_precise'] == '''E 31°09'17.99"'''
 
     def test_result_latlon_dm(self):
-        assert self.result['lat_dm'] == "69°31.703"
-        assert self.result['lon_dm'] == "31°9.299"
-        
+        assert self.result['lat_dm'] == "N 69°31.703'"
+        assert self.result['lon_dm'] == "E 31°09.299'"
+
     def test_result_mgrs(self):
         assert self.result['mgrs_compact'] == "36WVC2799414368"
         assert self.result['mgrs_pretty'] == "36W VC 27994 14368"
