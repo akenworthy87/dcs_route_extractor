@@ -1,0 +1,4 @@
+origin_mgrs: "55P BQ 61582 91840"
+# origin_mgrs: "55P BQ 61631 91839"
+central_meridian: 147
+scale_factor: 0.9996  
