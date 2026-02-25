@@ -14,7 +14,7 @@ Will probably be 0.9996
 
 - Open the mission editor and make a blank misson on that terrain
 - Run the mission and go to the F10 map
-- Find the default Bullseye location
+- Find the default Neutral (grey) Bullseye location
 - Zoom all the way in on the Bullseye
 - Alt-Left_Click as accurately as possible on the Bullseye
 - Copy the MGRS coordinates from the Coordinates popup
