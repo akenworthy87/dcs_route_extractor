@@ -8,7 +8,15 @@
         "editorBracketHighlight.foreground6": "#98C379",
         "activityBar.background": "#3a4355",
         "titleBar.activeBackground": "#3a4355",
-        "titleBar.activeForeground": "#FFFCFB"
+        "titleBar.activeForeground": "#FFFCFB",
+        "titleBar.inactiveBackground": "#282E3A",
+        "titleBar.inactiveForeground": "#FAFAFB",
+        "statusBar.background": "#282E3A",
+        "statusBar.foreground": "#FAFAFB",
+        "statusBar.debuggingBackground": "#282E3A",
+        "statusBar.debuggingForeground": "#FAFAFB",
+        "statusBar.noFolderBackground": "#282E3A",
+        "statusBar.noFolderForeground": "#FAFAFB"
     },
     "python-envs.defaultEnvManager": "ms-python.python:venv",
     "python-envs.pythonProjects": [],
