@@ -77,4 +77,4 @@ def select_terrain_spec(filelist: list[str] | None = None) -> str:
 
 def split_filename_from_path(filepath: Path) -> str:
     filename = filepath.stem
-    return filename.capitalize()
+    return filename
