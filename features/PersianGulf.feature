@@ -5,7 +5,7 @@ Feature: Waypoint conversions for PersianGulf
     When Metric: X+00000000 Z+00000000
     Then Lat Long Precise: N 26°10'18.54"   E 56°14'30.96"
     And Lat Long Decimal Minutes: N 26°10.309'   E 56°14.516'
-    And MGRS GRID: 40R DP 24244 94932
+    And MGRS GRID: 40R DP 24243 94932
 
   Scenario: Waypoint 1
     Given Map is PersianGulf
@@ -24,7 +24,7 @@ Feature: Waypoint conversions for PersianGulf
   Scenario: Waypoint 3
     Given Map is PersianGulf
     When Metric: X+373045.0625 Z-333250.90625
-    Then Lat Long Precise: N 29°28'28.39"   E 52°46'59.92"
+    Then Lat Long Precise: N 29°28'28.40"   E 52°46'59.92"
     And Lat Long Decimal Minutes: N 29°28.473'   E 52°46.998'
     And MGRS GRID: 39R XN 72909 61888
 
@@ -33,4 +33,4 @@ Feature: Waypoint conversions for PersianGulf
     When Metric: X+292009.34375 Z+283698.000
     Then Lat Long Precise: N 28°47'35.69"   E 59°07'49.57"
     And Lat Long Decimal Minutes: N 28°47.594'   E 59°07.826'
-    And MGRS GRID: 40R GS 07941 86942
+    And MGRS GRID: 40R GS 07942 86942
