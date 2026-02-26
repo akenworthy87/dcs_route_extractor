@@ -1,14 +1,6 @@
 from behave import given, when, then
-from behave.api.pending_step import StepNotImplementedError
-import sys
-from modules.load_route_data import load_routes_data
-from modules.process_waypoints import process_waypoints
-from modules.export_to_csv import export_to_csv
-from modules.process_argv import process_argv
-from modules.open_file_dialog import open_file_dialog
-from modules.select_routename import select_routename
 from modules.load_terrain_specs import load_terrain_specs
-from modules.process_terrain_spec import process_terrain_spec, TerrainSpec
+from modules.process_terrain_spec import process_terrain_spec
 from pathlib import Path
 from modules.load_route_data import Waypoint
 from modules.build_waypoint_coords import build_waypoint_coords
